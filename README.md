@@ -15,7 +15,6 @@ Done by Yang Lu (yang07ly@gmail.com).
 
 - npm >= 6
 - node >= 12
-- MySQL
 
 
 ## Setup
