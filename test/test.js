@@ -1,3 +1,5 @@
+/* global describe, it */
+
 const assert = require('assert')
 const Rule = require('../src/rule.js')
 const Checkout = require('../src/checkout.js')
@@ -7,30 +9,30 @@ const exp = require('chai').expect
 
 describe('Dius Coding Challenge', () => {
   // 3 for 2 deal on Apple TVs
-	const rule1 = new Rule("atv", 3, "atv",
-		"percent", 1, 1)
+  const rule1 = new Rule('atv', 3, 'atv',
+    'percent', 1, 1)
   // bulk discount of $50 for more than 4 iPads
-	const rule2 = new Rule("ipd", 5, "ipd",
-		"abs", 50, "all")
+  const rule2 = new Rule('ipd', 5, 'ipd',
+    'abs', 50, 'all')
   // free VGA for every MacBook Pro
-	const rule3 = new Rule("mbp", 1, "vga",
-		"percent", 1, 1)
-	const ipd = new Product("ipd", "Super iPad", 549.99)
-	const mbp = new Product("mbp", "MacBook Pro", 1399.99)
-	const atv = new Product("atv", "Apple TV", 109.5)
-	const vga = new Product("vga", "VGA adapter", 30)
+  const rule3 = new Rule('mbp', 1, 'vga',
+    'percent', 1, 1)
+  const ipd = new Product('ipd', 'Super iPad', 549.99)
+  const mbp = new Product('mbp', 'MacBook Pro', 1399.99)
+  const atv = new Product('atv', 'Apple TV', 109.5)
+  const vga = new Product('vga', 'VGA adapter', 30)
 
-	it('1. Success story - 3 atv, 1 vga', () => {
-		const co = new Checkout([rule1, rule2, rule3])
+  it('1. Success story - 3 atv, 1 vga', () => {
+    const co = new Checkout([rule1, rule2, rule3])
     co.scan(atv)
     co.scan(atv)
     co.scan(atv)
     co.scan(vga)
 
-		const expect = 249
-		const actual = co.total()
-		assert.strictEqual(actual, expect)
-	})
+    const expect = 249
+    const actual = co.total()
+    assert.strictEqual(actual, expect)
+  })
 
   it('2. Success story - 2 atv, 5 ipd', () => {
     const co = new Checkout([rule1, rule2, rule3])
@@ -58,23 +60,23 @@ describe('Dius Coding Challenge', () => {
     assert.strictEqual(actual, expect)
   })
 
-	it('4. Success story - all promos applied', () => {
-		const co = new Checkout([rule1, rule2, rule3])
-		co.scan(ipd)
-  	co.scan(ipd)
-  	co.scan(ipd)
-  	co.scan(ipd)
+  it('4. Success story - all promos applied', () => {
+    const co = new Checkout([rule1, rule2, rule3])
     co.scan(ipd)
-		co.scan(mbp)
-		co.scan(atv)
-		co.scan(atv)
-		co.scan(atv)
-		co.scan(vga)
+    co.scan(ipd)
+    co.scan(ipd)
+    co.scan(ipd)
+    co.scan(ipd)
+    co.scan(mbp)
+    co.scan(atv)
+    co.scan(atv)
+    co.scan(atv)
+    co.scan(vga)
 
-		const expect = 4118.94
-		const actual = co.total()
-		assert.strictEqual(actual, expect)
-	})
+    const expect = 4118.94
+    const actual = co.total()
+    assert.strictEqual(actual, expect)
+  })
 
   it('5. Success story - no promos applied', () => {
     const co = new Checkout([])
@@ -111,16 +113,15 @@ describe('Dius Coding Challenge', () => {
     assert.strictEqual(actual, expect)
   })
 
-
   it('7. Success story - conflicting promos', () => {
     // buy an Apple TV and buy a VGA for 50% off
-    const rule4 = new Rule("atv", 1, "vga",
-    "percent", 0.5, 1)
+    const rule4 = new Rule('atv', 1, 'vga',
+      'percent', 0.5, 1)
     const co = new Checkout([rule1, rule2, rule3, rule4])
     co.scan(atv)
     co.scan(vga)
     co.scan(mbp)
-    
+
     const expect = 1509.49
     const actual = co.total()
     assert.strictEqual(actual, expect)
@@ -129,10 +130,10 @@ describe('Dius Coding Challenge', () => {
   // refer to README for a detailed explanation of this test case
   it('8. Success story - conflicting promos', () => {
     // 10% off for Apple TV
-    const rule4 = new Rule("atv", 1, "atv",
-    "percent", 0.1, 1)
+    const rule4 = new Rule('atv', 1, 'atv',
+      'percent', 0.1, 1)
     const co = new Checkout([rule1, rule2, rule3, rule4])
-    
+
     co.scan(atv)
     let expect = 98.55
     let actual = co.total()
@@ -154,16 +155,15 @@ describe('Dius Coding Challenge', () => {
     assert.strictEqual(actual, expect)
   })
 
-  
   it('9. Success story - more than 1 applicable promos', () => {
     // buy a MacBook Pro and get an iPad for free
-    const rule4 = new Rule("mbp", 1, "ipd",
-    "percent", 1, 1)
+    const rule4 = new Rule('mbp', 1, 'ipd',
+      'percent', 1, 1)
     const co = new Checkout([rule1, rule2, rule3, rule4])
     co.scan(ipd)
     co.scan(vga)
     co.scan(mbp)
-    
+
     const expect = 1399.99
     const actual = co.total()
     assert.strictEqual(actual, expect)
@@ -172,30 +172,30 @@ describe('Dius Coding Challenge', () => {
   // refer to README for a detailed explanation of this test case
   it('10. Success story - more than 1 applicable promos', () => {
     // 10% off for Macbook Pro
-    const rule4 = new Rule("mbp", 1, "mbp",
-    "percent", 0.1, 1)
+    const rule4 = new Rule('mbp', 1, 'mbp',
+      'percent', 0.1, 1)
     // 20% off for VGA
-    const rule5 = new Rule("vga", 1, "vga",
-    "percent", 0.2, 1)
+    const rule5 = new Rule('vga', 1, 'vga',
+      'percent', 0.2, 1)
     const co = new Checkout([rule1, rule2, rule3, rule4])
     co.scan(vga)
     co.scan(mbp)
-    
+
     const expect = 1259.99
     const actual = co.total()
     assert.strictEqual(actual, expect)
   })
 
-  it ('11. Error handling - invalid product', () => {
+  it('11. Error handling - invalid product', () => {
     exp(() => {
-      const ipn = new Product("ipn", "iPhone", '549.99')
+      const iphone = new Product('ipn', 'iPhone', '549.99')
     }).to.throw(InvalidArgumentException)
   })
 
-  it ('12. Error handling - invalid promo', () => {
+  it('12. Error handling - invalid promo', () => {
     exp(() => {
-      const rule4 = new Rule("atv", 3, "atv",
-    "percent", 1, 'none')
+      const rule = new Rule('atv', 3, 'atv',
+        'percent', 1, 'none')
     }).to.throw(InvalidArgumentException)
   })
 })
