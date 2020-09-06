@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This is a solution to [DiUS Coding Challenge - Computer Store](https://github.com/DiUS/coding-tests/blob/master/dius_shopping.md). It is a checkout system that takes in a list of pricing rules, scans the product, computes the applicable promotions and discounts, and outputs a total price. For information about the sample usage, refer to `test/test.js`.
+This is a solution to [DiUS Coding Challenge - Computer Store](https://github.com/DiUS/coding-tests/blob/master/dius_shopping.md). It is a checkout system written in NodeJS that takes in a list of pricing rules, scans the product, computes the applicable promotions and discounts, and outputs a total price. For information about the sample usage, refer to `test/test.js`.
 
 
 ## Author
