@@ -126,3 +126,5 @@ const rule = {
 	prodo_qty: 1
 }
 ```
+
+For validation rules on these parameters, refer to `src/rule.js`.
